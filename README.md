@@ -1,21 +1,21 @@
 tectareas
 =========
-[![Build Status]development]
 
-## Requirimientos
+## Requirements
 
 * Vagrant (http://www.vagrantup.com/)
 * fabric (http://fabfile.org/)
 
-## Configuraciones
+## Settings
 
-1. Agregar `192.168.33.10   tectareas.local` a  /etc/hosts
-2. Reiniciar apache `/etc/init.d/apache2 restart`
+1. Add host `192.168.33.10   tectareas.local` to  /etc/hosts
+2. Restart apache `/etc/init.d/apache2 restart`
 
 ## Setup
 
 1. `vagrant up`
 
 
-## URL Desarrollo
+## Development URL
+
 * `tectareas.local`
