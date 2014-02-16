@@ -83,6 +83,16 @@ def executemigration():
 
 
 @task
+def rollbackmigration():
+    '''
+    Elimina la ultima migracion
+    '''
+    require('site_dir')
+    with cd(env.site_dir):
+        run('php artisan migrate:rollback')
+
+
+@task
 def executeseed():
     '''
     Agrega datos de prueba en la base de datos

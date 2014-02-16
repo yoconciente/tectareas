@@ -16,7 +16,6 @@ Route::get('/', function()
 	return View::make('index');
 });
 
-Route::get('sign-up', function()
-{
-	return View::make('sign-up');
-});
+
+Route::resource('sign-up', 'SignUpController');
+Route::get('/activate/{id}/{code}', array('uses' => 'SignUpController@activateAccount', 'before' => 'guest'));
