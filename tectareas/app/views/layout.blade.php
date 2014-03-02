@@ -40,15 +40,25 @@
                         </ul>
                     </li>
                 </ul>
+                @if(Auth::check())
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li class='active'><a href="#">Bienvenido {{ Auth::user()->email; }}</a></li>
+                        <li class='active'><a href="{{ URL::to('/logout') }}">Cerrar sesión</a></li>
+                    </ul>
+                </div>
+                @else
+                {{ Form::open(array('url' => '/login', 'method' => 'POST', 'role' => 'form', 'class' => 'navbar-form navbar-right')) }}
                 <form class="navbar-form navbar-right">
                     <div class="form-group">
-                        <input type="text" placeholder="Email" class="form-control">
+                        {{ Form::text('email', null, array('class' => 'form-control', 'placeholder' => 'Email')) }}
                     </div>
                     <div class="form-group">
-                        <input type="password" placeholder="Password" class="form-control">
+                        {{ Form::password('password', array('class' => 'form-control', 'placeholder' => 'Contraseña')) }}
                     </div>
-                    <button type="submit" class="btn btn-success">Entrar</button>
-                </form>
+                    {{ Form::submit('Entrar', array('class' => 'btn btn-success')) }}
+                {{ Form::close() }}
+                @endif
             </div><!--/.navbar-collapse -->
         </div>
     </div>

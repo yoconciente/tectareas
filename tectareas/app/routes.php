@@ -19,3 +19,6 @@ Route::get('/', function()
 
 Route::resource('sign-up', 'SignUpController');
 Route::get('/activate/{id}/{code}', array('uses' => 'SignUpController@activateAccount', 'before' => 'guest'));
+Route::get('/login', array('uses' => 'SignUpController@showLogin', 'before' => 'guest'));
+Route::post('/login', array('uses' => 'SignUpController@doLogin', 'before' => 'guest'));
+Route::get('/logout', array('uses' => 'SignUpController@doLogout', 'before' => 'auth'));

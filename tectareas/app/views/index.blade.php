@@ -8,8 +8,13 @@
     <div class="jumbotron">
         <div class="container">
             <h1>Tectareas</h1>
-            <p>Registrate en Tectareas para que puedas compartir tus recursos y preguntar a la comunidad tus dudas.</p>
-            <p><a href="{{ URL::to('sign-up') }}" class="btn btn-primary btn-lg">Registrarme &raquo;</a></p>
+            @if(Auth::check())
+                <p>Comparte tus recursos, pregunta y responde. Ademas puedes ver tu perfil y modificar tu información.</p>
+                <p><a href="#" class="btn btn-primary btn-lg">Ver mi perfil &raquo;</a></p>
+            @else
+                <p>Registrate en Tectareas para que puedas compartir tus recursos y preguntar a la comunidad tus dudas.</p>
+                <p><a href="{{ URL::to('sign-up') }}" class="btn btn-primary btn-lg">Registrarme &raquo;</a></p>
+            @endif
         </div>
     </div>
 @stop
