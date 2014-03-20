@@ -47,7 +47,11 @@ class ProfileController extends \BaseController {
 
 	public function update($id)
 	{
-		//
+		$response = User::editUser($id, Input::all());
+		if($response['error'] == true) {
+			return Redirect::to('/profile')->withErrors($response['message'])->withInput();
+		}
+		return Redirect::to('/profile')->with('message_profile', $response['message']);
 	}
 
 	public function destroy($id)

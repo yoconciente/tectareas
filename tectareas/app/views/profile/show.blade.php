@@ -43,7 +43,9 @@
                 </div>
             </div>
             <div class="col-md-6">
-
+                @if(Session::get('message_profile'))
+                    <div class="alert alert-success">{{ Session::get('message_profile') }}</div>
+                @endif
                 {{ Form::model($user, array('url' => '/profile/'.$user->id, 'method' => 'PUT', 'role' => 'form')) }}
                 {{ Form::hidden('id') }}
                 <div class="form-group">

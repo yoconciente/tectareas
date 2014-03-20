@@ -18,7 +18,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     protected $hidden = array('password');
 
     public function profession(){
-        return $this->belongsTo('Profession', 'id');
+        return $this->belongsTo('Profession');
     }
 
     public static function setPassword($id, $input) {
@@ -81,6 +81,35 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	    $response['message'] = "¡Usuario creado satisfactoriamente!";
 	    $response['error'] = false;
 	    $response['data'] = $user;
+        }
+        return $response;
+    }
+
+    public static function editUser($id, $input) {
+	if($id != $input['id'])
+	    App::abort(404);
+	$response = array();
+        $rules = array(
+            'name' => 'required',
+            'university' => 'required',
+	    'profession_id' => array('required', 'integer'),
+        );
+        $validator = Validator::make($input, $rules);
+        if($validator->fails()) {
+            $response['message'] = $validator;
+            $response['error'] = true;
+        } else {
+            $user = User::find($id);
+	    if($user) {
+		$user->fill($input);
+		$user->push();
+		$response['message'] = "¡Usuario editado con éxito!";
+		$response['error'] = false;
+		$response['data'] = $user;
+	    } else {
+		Auth::logout();
+		return Redirect::to('/');
+	    }
         }
         return $response;
     }
