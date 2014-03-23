@@ -16,14 +16,16 @@ Route::get('/', function()
 	return View::make('index');
 });
 
-
-Route::resource('sign-up', 'SignUpController');
-Route::get('/activate/{id}/{code}', array('uses' => 'SignUpController@activateAccount', 'before' => 'guest'));
-Route::get('/login', array('uses' => 'SignUpController@showLogin', 'before' => 'guest'));
-Route::post('/login', array('uses' => 'SignUpController@doLogin', 'before' => 'guest'));
-Route::get('/logout', array('uses' => 'SignUpController@doLogout', 'before' => 'auth'));
+Route::group(array('before' => 'guest'), function() {
+	Route::get('sign-up', array('uses' => 'UserController@index'));
+	Route::post('sign-up', array('uses' => 'UserController@store'));
+	Route::get('/activate/{id}/{code}', array('uses' => 'UserController@activateAccount'));
+	Route::get('/login', array('uses' => 'UserController@showLogin'));
+	Route::post('/login', array('uses' => 'UserController@doLogin'));
+});
 
 Route::group(array('before' => 'auth'), function() {
-    Route::resource('profile', 'ProfileController');
-    Route::post('profile/{id}/change-password', array('uses' => 'ProfileController@changePassword'));
+    Route::resource('profile', 'UserController');
+    Route::post('profile/{id}/change-password', array('uses' => 'UserController@changePassword'));
+    Route::get('logout', array('uses' => 'UserController@doLogout'));
 });

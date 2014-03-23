@@ -1,14 +1,18 @@
 @extends('layout')
 
 @section('title')
-    Cuenta Confirmada
+    @if(Session::get('confirmated'))
+        Cuenta Confirmada
+    @else
+        Iniciar Sesión
+    @endif
 @stop
 
 @section('content')
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             @if(Session::get('confirmated'))
-                <h2>Has confirmado tu cuenta, intenta iniciar sesión</h2>
+                <h2>Has confirmado tu cuenta, ahora puedes iniciar sesión</h2>
             @else
                 <h2>Iniciar sesión</h2>
             @endif
