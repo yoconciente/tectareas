@@ -22,3 +22,8 @@ Route::get('/activate/{id}/{code}', array('uses' => 'SignUpController@activateAc
 Route::get('/login', array('uses' => 'SignUpController@showLogin', 'before' => 'guest'));
 Route::post('/login', array('uses' => 'SignUpController@doLogin', 'before' => 'guest'));
 Route::get('/logout', array('uses' => 'SignUpController@doLogout', 'before' => 'auth'));
+
+Route::group(array('before' => 'auth'), function() {
+    Route::resource('profile', 'ProfileController');
+    Route::post('profile/{id}/change-password', array('uses' => 'ProfileController@changePassword'));
+});
