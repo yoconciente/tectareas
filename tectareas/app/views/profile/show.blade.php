@@ -16,7 +16,7 @@
                 <p><a class="btn btn-primary col-md-9" href="http://gravatar.com/emails/" target="_blank">Cambiar foto de perfil</a></p>
                 <br><br>
                 <h4 class="title"><small>escuela</small> {{ $user->university }}</h4>
-                <h4 class="title"><small>professión</small> {{ $user->profession->name }}</h4>
+                <h4 class="title"><small>profesión</small> {{ $user->profession->name }}</h4>
                 <h4 class="title"><small>calificación</small> 100 [badge]</h4>
                 <h4 class="title">## RESOURCES</h4>
                 <h4 class="title">## QUESTIONS</h4>
@@ -32,12 +32,14 @@
                                 <h4 class="modal-title">Desactivar cuenta</h4>
                             </div>
                             <div class="modal-body">
-                                Content for the dialog / modal goes here.
+                                Al desactivar tu cuenta ya no podras ingresar el sitio Tectareas
                             </div>
+                            {{ Form::open(array('url' => '/profile/'.$user->id, 'method' => 'DELETE', 'role' => 'form')) }}
                             <div class="modal-footer">
                                 <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
-                                <a href="#" class="btn btn-primary">Desactivar</a>
+                                {{ Form::submit('Desactivar', array('class' => 'btn btn-danger')) }}
                             </div>
+                            {{ Form::close() }}
                         </div>
                     </div>
                 </div>

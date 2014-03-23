@@ -21,6 +21,20 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $this->belongsTo('Profession');
     }
 
+    public static function desactivateAccount($id)
+    {
+	$response = array();
+	$user = User::find($id);
+	if($user) {
+	    $user->confirmed = 'no';
+	    $user->save();
+	    $response['error'] = false;
+	} else {
+	    $response['error'] = true;
+	}
+	return $response;
+    }
+
     public static function setPassword($id, $input) {
 	$response = array();
 	$rules = array(

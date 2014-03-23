@@ -56,7 +56,12 @@ class ProfileController extends \BaseController {
 
 	public function destroy($id)
 	{
-		//
+		$response = User::desactivateAccount($id);
+		if($response['error'] == true) {
+			App::abort(404);
+		}
+		$request = Request::create('/logout', 'GET', array());
+		return Route::dispatch($request);
 	}
 
 }
